@@ -1,63 +1,7 @@
 // Colors
-$light: #EFEFED;
-$medium: #B8BDB9;
-$dark: #4D4F51;
 
 body{
-	background-color: $light;
 	font-family: 'Roboto', sans-serif;
 	width: 100%;
 	height: 100%;
-}
-
-h1{
-	font-family: 'Lato', sans-serif;
-	font-weight: 300;
-	font-size: 38px;
-}
-
-p{
-	font-family: 'Roboto', sans-serif;
-	font-size: 18px;
-	line-height: 1.6em;
-	color: $dark;
-}
-
-a{
-	text-decoration: none;
-	color: $medium;
-	transition: color 0.25s ease;
-
-	&:hover{
-		color: $dark;
-	}
-}
-
-// Colors
-.light{
-	color: $light;
-}
-.medium{
-	color: $medium;
-}
-.dark{
-	color: $dark;
-}
-
-.container{
-	@include container;
-
-	@include breakpoint($break-md-max){
-		max-width: 768px;
-		overflow: hidden;
-	}
-
-	@include breakpoint($break-sm-max){
-		padding: gutter(12);
-	}
-}
-
-.row{
-	@include span(12);
-	clear: both;
 }

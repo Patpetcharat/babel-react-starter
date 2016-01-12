@@ -1,39 +1,43 @@
 import $ from 'jquery';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TweenLite from 'gsap';
-
-import {renderCardsComponent} from './components/cards.js';
 
 $(document).ready(function(){
-	var CardsComponent = renderCardsComponent('cards');
+	console.log('ready');
+	
+	var mobileOS = getMobileOperatingSystem();
+	
+	var customURL = 'isy://?card_id=4';
 
-	var duration = 0.5;
-	var stagger = 0.1;
-
-	$('#regenerate').click(function(){
-		var transitionTime = $('#cards .card').length * stagger + duration;
-
-		$('#cards .card').each(function(index, value){
-			TweenLite.to($(this), duration, {
-				x:-$(this).position().left, opacity:0, delay:stagger*index
-			});
-		});
-
-		TweenLite.delayedCall(transitionTime, function(){
-			CardsComponent.regenerateCards();
-		});
-	});
-
-	// Handle event triggered when cards are regenerated
-	$(CardsComponent).on('CardsDidUpdate', function(){
-		$('#cards .card').each(function(index, value){
-			TweenLite.fromTo($(this), duration, {
-				x:100, opacity:0
-			}, {
-				x:0, opacity:1, delay:stagger*index
-			});
-		});
-	});
+	if(mobileOS == "iOS"){
+		window.location = customURL;
+	}else if(mobileOS == "Android"){
+		var iframe = document.createElement("iframe");
+		iframe.style.border = "none";
+		iframe.style.width = "1px";
+		iframe.style.height = "1px";
+		// iframe.onload = function () {
+		// 	document.location = alt;
+		// };
+		iframe.src = customURL;
+		document.body.appendChild(iframe);
+	}else{
+		console.log('neither Android nor iOS');
+	}
 });
 
+/**
+ * Determine the mobile operating system.
+ * This function either returns 'iOS', 'Android' or 'unknown'
+ *
+ * @returns {String}
+ */
+function getMobileOperatingSystem() {
+	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+	if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
+		return 'iOS';
+	}else if( userAgent.match( /Android/i ) ){
+		return 'Android';
+	}else{
+		return 'unknown';
+	}
+}
