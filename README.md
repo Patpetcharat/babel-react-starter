@@ -8,7 +8,7 @@ A starter boilerplate for using using ES6 with React.
 - Speedy Browserify updating in development environment using Watchify
 - Compile SASS with autoprefixer
 - Minify JS and CSS for production build
-- LiveReload
+- LiveReload and CSS Injection with BrowserSync)
 
 ## Getting Started
 ### Install
@@ -16,7 +16,7 @@ A starter boilerplate for using using ES6 with React.
 $ npm install
 ```
 
-### Development server (with LiveReload)
+### Development server (with BrowserSync)
 ```sh
 $ gulp
 ```
